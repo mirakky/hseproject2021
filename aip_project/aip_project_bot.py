@@ -42,6 +42,7 @@ def funcs(message):
 
         elif message.text == 'Узнать каллорийность 👍':
             bot.send_message(message.chat.id,'Введи продукт. Например, "Авокадо":')
+            bot.register_next_step_handler(message, find)
         #elif message.text == "Авокадо":
             #bot.send_message(message.chat.id,"<b>Авокадо</b>\n<b>Калории на 100 продукта</b>: 212\n<b>Белки</b>: 2.0\n<b>Жиры</b>: 20.0\n<b>Углеводы</b>: 6.0".format(message.from_user, bot.get_me()),
     #parse_mode='html')
