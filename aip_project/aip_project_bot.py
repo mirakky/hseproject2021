@@ -4,6 +4,19 @@ import sqlite3
 
 from telebot import types
 
+"""
+Этот бот является итоговым проектом по дисциплине "Алгоритмизация и программирование".
+Бот создан:
+студентами группы БИБ215
+Каримовым Каримом 
+Чиняевой Алиной
+
+... - Каримов Карим 
+Файл sql_database.py; База данных "project.db"; Файлы, находящиеся в папке "parcers"; Функция поиска позиций; Функция вывода хараткеристик  - Чиняева Алина
+
+Для изучения использовались материалы:
+"""
+
 bot = telebot.TeleBot(config.TOKEN)
 connect = sqlite3.connect("project.db", check_same_thread=False)
 cursor = connect.cursor()
@@ -49,6 +62,7 @@ def funcs(message):
         else:
             bot.send_message(message.chat.id,'Меня ещё не дописали друг, не понимаю тебя.')
 
+# Поиск позиций в столбце "name" в таблице "products"
 def find(message):
     text = message.text
     #print(cursor.execute("SELECT category FROM products WHERE category=?", (text,)))
@@ -69,7 +83,7 @@ def find(message):
         bot.send_message(message.chat.id, "Что именно тебя интересует?", reply_markup=markup)
         bot.register_next_step_handler(message, output)
 
-
+# Вывод данных(столбец "energy") позиций в столбце "name" в таблице "products"
 def output(message):
     text = message.text
     cursor.execute("SELECT energy FROM products WHERE name=?", (text,))
