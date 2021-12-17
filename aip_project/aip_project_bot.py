@@ -65,10 +65,8 @@ def funcs(message):
 # Поиск позиций в столбце "name" в таблице "products"
 def find(message):
     text = message.text
-    #print(cursor.execute("SELECT category FROM products WHERE category=?", (text,)))
     cursor.execute("SELECT * FROM products WHERE name LIKE '%'||?||'%'", (text,))
     ans = cursor.fetchall()
-    #print(len(ans))
     if len(ans) == 0:
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         item = types.KeyboardButton("Узнать каллорийность 👍",)
