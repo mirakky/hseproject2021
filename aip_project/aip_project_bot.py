@@ -60,7 +60,7 @@ def find(message):
         item = types.KeyboardButton("Узнать каллорийность 👍",)
         markup.add(item)
         bot.send_message(message.chat.id, 'Таково у нас не водится, попробуй ещё раз', reply_markup=markup)
-        bot.register_next_step_handler(message, select_aim)
+        bot.register_next_step_handler(message, funcs)
     else:
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         for i, r in enumerate(ans):
