@@ -1,9 +1,12 @@
 import telebot
 import config
+import sqlite3
 
 from telebot import types
 
 bot = telebot.TeleBot(config.TOKEN)
+connect = sqlite3.connect("project.db", check_same_thread=False)
+cursor = connect.cursor()
 
 # Приветствие с пользователями
 @bot.message_handler(commands=['start'])
@@ -39,11 +42,39 @@ def funcs(message):
 
         elif message.text == 'Узнать каллорийность 👍':
             bot.send_message(message.chat.id,'Введи продукт. Например, "Авокадо":')
-        elif message.text == "Авокадо":
-            bot.send_message(message.chat.id,"<b>Авокадо</b>\n<b>Калории на 100 продукта</b>: 212\n<b>Белки</b>: 2.0\n<b>Жиры</b>: 20.0\n<b>Углеводы</b>: 6.0".format(message.from_user, bot.get_me()),
-    parse_mode='html')
+        #elif message.text == "Авокадо":
+            #bot.send_message(message.chat.id,"<b>Авокадо</b>\n<b>Калории на 100 продукта</b>: 212\n<b>Белки</b>: 2.0\n<b>Жиры</b>: 20.0\n<b>Углеводы</b>: 6.0".format(message.from_user, bot.get_me()),
+    #parse_mode='html')
         else:
             bot.send_message(message.chat.id,'Меня ещё не дописали друг, не понимаю тебя.')
+
+def find(message):
+    text = message.text
+    #print(cursor.execute("SELECT category FROM products WHERE category=?", (text,)))
+    cursor.execute("SELECT * FROM products WHERE name LIKE '%'||?||'%'", (text,))
+    ans = cursor.fetchall()
+    #print(len(ans))
+    if len(ans) == 0:
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        item = types.KeyboardButton("Узнать каллорийность 👍",)
+        markup.add(item)
+        bot.send_message(message.chat.id, 'Таково у нас не водится', reply_markup=markup)
+        bot.register_next_step_handler(message, select_aim)
+    else:
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        for i, r in enumerate(ans):
+            item = types.KeyboardButton(r[2])
+            markup.add(item)
+        bot.send_message(message.chat.id, "Что именно тебя интересует", reply_markup=markup)
+        bot.register_next_step_handler(message, output)
+
+
+def output(message):
+    text = message.text
+    cursor.execute("SELECT energy FROM products WHERE name=?", (text,))
+    ans = cursor.fetchone()
+    out = text + "\nНа 100 грамм: \n" + str(ans)[2:-3]
+    bot.send_message(message.chat.id, out,reply_markup=None)
 
 # Входные данные для бота, с помощью которых будет производиться расчёт. Пока что здесь константы:
 
