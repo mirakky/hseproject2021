@@ -4,9 +4,9 @@ import unittest
 import time
 
 # Your API ID, hash and session string here
-api_id = int('')
-api_hash = ""
-client = TelegramClient('', api_id, api_hash)
+api_id = int('17351787')
+api_hash = "79086c02bc72018bcd095422381cf4f0"
+client = TelegramClient('@mirakky', api_id, api_hash)
 client.start()
 
 
