@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module aip_project_bot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>aip_project_bot</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:d%3A%5Cbots%5Chseproject2021%5Caip_project%5Caip_project_bot.py">d:\bots\hseproject2021\aip_project\aip_project_bot.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="config.html">config</a><br>
+</td><td width="25%" valign=top><a href="sqlite3.html">sqlite3</a><br>
+</td><td width="25%" valign=top><a href="telebot.html">telebot</a><br>
+</td><td width="25%" valign=top><a href="telebot.types.html">telebot.types</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-callback_inline"><strong>callback_inline</strong></a>(call)</dt><dd><tt>Функция&nbsp;отвечает&nbsp;за&nbsp;кнопки,&nbsp;которые&nbsp;выводятся&nbsp;при&nbsp;выборе&nbsp;пола&nbsp;при&nbsp;расчёте&nbsp;калорий</tt></dd></dl>
+ <dl><dt><a name="-find"><strong>find</strong></a>(message)</dt><dd><tt>Функция&nbsp;отвечает&nbsp;за&nbsp;поиск&nbsp;позиций&nbsp;в&nbsp;столбце&nbsp;"name"&nbsp;в&nbsp;базе&nbsp;данных&nbsp;в&nbsp;таблице&nbsp;"products".<br>
+Возвращет&nbsp;данные&nbsp;в&nbsp;виде&nbsp;кнопок&nbsp;бота.</tt></dd></dl>
+ <dl><dt><a name="-funcs"><strong>funcs</strong></a>(message)</dt><dd><tt>Функция&nbsp;отвечает&nbsp;за&nbsp;выбор&nbsp;пользователя,<br>
+хочет&nbsp;ли&nbsp;он&nbsp;узнать&nbsp;норму&nbsp;калорий&nbsp;или&nbsp;высчитать&nbsp;калорийность&nbsp;продукта,<br>
+при&nbsp;том&nbsp;или&nbsp;ином&nbsp;выборе,&nbsp;происходит&nbsp;перенаправление&nbsp;на&nbsp;отдельные&nbsp;функции</tt></dd></dl>
+ <dl><dt><a name="-get_parms"><strong>get_parms</strong></a>(message)</dt><dd><tt>Функция&nbsp;отвечает&nbsp;за&nbsp;расчёт&nbsp;параметров&nbsp;&nbsp;пользователя,&nbsp;с&nbsp;помощью&nbsp;которых&nbsp;будет&nbsp;производиться&nbsp;расчёт</tt></dd></dl>
+ <dl><dt><a name="-output"><strong>output</strong></a>(message)</dt><dd><tt>Функция&nbsp;отвечает&nbsp;за&nbsp;вывод&nbsp;данных(столбец&nbsp;"energy")&nbsp;позиций&nbsp;столбца&nbsp;"name"&nbsp;в&nbsp;базе&nbsp;данных&nbsp;в&nbsp;таблице&nbsp;"products".</tt></dd></dl>
+ <dl><dt><a name="-product_name"><strong>product_name</strong></a>(message)</dt><dd><tt>Функция&nbsp;отвечает&nbsp;за&nbsp;то,&nbsp;чтобы&nbsp;отправить&nbsp;пользователя&nbsp;к&nbsp;поиску&nbsp;любого&nbsp;продукта</tt></dd></dl>
+ <dl><dt><a name="-router"><strong>router</strong></a>(message)</dt><dd><tt>Функция&nbsp;возвращает&nbsp;пользователя&nbsp;из&nbsp;меню&nbsp;выбора&nbsp;продуктов</tt></dd></dl>
+ <dl><dt><a name="-welcome"><strong>welcome</strong></a>(message)</dt><dd><tt>Стартовая&nbsp;функция&nbsp;для&nbsp;бота,&nbsp;приветствует&nbsp;пользователя&nbsp;и&nbsp;предлагает&nbsp;ознакомиться&nbsp;со&nbsp;всеми&nbsp;его&nbsp;функциями.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>bot</strong> = &lt;telebot.TeleBot object&gt;<br>
+<strong>connect</strong> = &lt;sqlite3.Connection object&gt;<br>
+<strong>cursor</strong> = &lt;sqlite3.Cursor object&gt;<br>
+<strong>m</strong> = 0<br>
+<strong>w</strong> = 0</td></tr></table>
+</body></html>

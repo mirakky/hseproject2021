@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlite:C:\Users\alonc\OneDrive\Рабочий стол\git_hub_clone\hseproject2021\aip_project\project.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="@aloncess" uuid="046f774d-bea5-400d-a4bd-88872b5dce99">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\bots\hseproject2021\aip_project\@aloncess.session</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
