@@ -15,6 +15,8 @@ from telebot import types
 Файл sql_database.py; База данных "project.db"; Файлы, находящиеся в папке "parcers"; Функция поиска позиций; Функция вывода хараткеристик  - Чиняева Алина
 
 Для изучения использовались материалы:
+https://blog.1a23.com/2020/03/06/how-to-write-integration-tests-for-a-telegram-bot/ для написания тестов
+
 """
 
 bot = telebot.TeleBot(config.TOKEN)
