@@ -4,9 +4,9 @@ import unittest
 import time
 
 # Your API ID, hash and session string here
-api_id = int('14422138')
-api_hash = "22294f2929dd121b97a5f779a29ea514"
-client = TelegramClient('@aloncess', api_id, api_hash)
+api_id = int('')
+api_hash = ""
+client = TelegramClient('', api_id, api_hash)
 client.start()
 
 
@@ -15,10 +15,68 @@ class TG_test(unittest.TestCase):
         try:
             client.send_message('@calories_counter_bot', '/start')
             time.sleep(2)
-            #messages = client.get_messages('@calories_counter_bot')
             for message in client.get_messages('@calories_counter_bot'):
                 m = message.message
-                #print(m)
+            text = "Скажи, какую преследуешь цель?"
+            self.assertEqual(m, text)
+        except:
+            self.assertFalse(True)
+    def test_2(self):
+        try:
+            client.send_message('@calories_counter_bot', 'Узнать каллорийность 👍')
+            time.sleep(2)
+            for message in client.get_messages('@calories_counter_bot'):
+                m = message.message
+            text = '"Введи продукт. Например, "Авокадо":"'
+            self.assertEqual(m, text)
+        except:
+            self.assertFalse(True)
+    def test_3(self):
+        try:
+            client.send_message('@calories_counter_bot', '/start')
+            time.sleep(2)
+            for message in client.get_messages('@calories_counter_bot'):
+                m = message.message
+            text = "Скажи, какую преследуешь цель?"
+            self.assertEqual(m, text)
+        except:
+            self.assertFalse(True)
+    def test_4(self):
+        try:
+            client.send_message('@calories_counter_bot', '/start')
+            time.sleep(2)
+            for message in client.get_messages('@calories_counter_bot'):
+                m = message.message
+            text = "Скажи, какую преследуешь цель?"
+            self.assertEqual(m, text)
+        except:
+            self.assertFalse(True)
+    def test_5(self):
+        try:
+            client.send_message('@calories_counter_bot', '/start')
+            time.sleep(2)
+            for message in client.get_messages('@calories_counter_bot'):
+                m = message.message
+            text = "Скажи, какую преследуешь цель?"
+            self.assertEqual(m, text)
+        except:
+            self.assertFalse(True)
+    def test_6(self):
+        try:
+            client.send_message('@calories_counter_bot', '/start')
+            time.sleep(2)
+            for message in client.get_messages('@calories_counter_bot'):
+                m = message.message
+            text = "Скажи, какую преследуешь цель?"
+            self.assertEqual(m, text)
+        except:
+            self.assertFalse(True)
+    def test_7(self):
+        try:
+            client.send_message('@calories_counter_bot', '/start')
+            time.sleep(2)
+            for message in client.get_messages('@calories_counter_bot'):
+                m = message.message
             text = "Скажи, какую преследуешь цель?"
             self.assertEqual(m, text)
         except:
