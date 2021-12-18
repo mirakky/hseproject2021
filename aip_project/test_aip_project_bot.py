@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 from telethon.sync import TelegramClient
 from telethon.sessions import StringSession
 from telethon.tl.functions.channels import GetMessagesRequest
@@ -14,6 +15,38 @@ with TelegramClient(StringSession(), api_id, api_hash) as client:
     print("Your session string is:", client.session.save())
 
 client = TelegramClient(session_str, api_id, api_hash)
+=======
+
+import unittest
+import time
+from telethon import TelegramClient
+import aiohttp
+from unittest import IsolatedAsyncioTestCase
+
+from project.db import cache, database
+from aip_project import aip_project_bot
+
+api_id= int('')
+api_hash = ""
+client = TelegramClient('session_name', api_id, api_hash)
+
+client.start()
+
+
+class AIP(unittest.TestCase):
+    def test_start(self):
+        try:
+            client.send_message('@calories_counter_bot', '/start')
+            time.sleep(2)
+            messages = client.get_messages('@calories_counter_bot')
+            for message in client.get_messages('@calories_counter_bot', limit=1):
+                m = message.message
+            self.assertEqual(len(messages), 1)
+            text = f'Добро пожаловать, K!\nЯ - Бот для подсчёта калорий 🍕, который поможет тебе подсчитать калории, а также тут ещё много разных плюшек!'
+            self.assertRegex(m, text)
+        except:
+            self.assertFalse(True)
+>>>>>>> Stashed changes
 
 client.start()
 
