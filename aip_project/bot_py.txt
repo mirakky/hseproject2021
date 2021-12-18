@@ -11,7 +11,7 @@ from telebot import types
 Каримовым Каримом 
 Чиняевой Алиной
 
-Функция welcome; Функция funcs; Функция get_parms; Функция product_name; Функция router; Функция callback_inline - Каримов Карим 
+... - Каримов Карим 
 Файл sql_database.py; База данных "project.db"; Файлы, находящиеся в папке "parcers"; Функция поиска позиций; Функция вывода хараткеристик  - Чиняева Алина
 
 Для изучения использовались материалы:
@@ -21,10 +21,6 @@ bot = telebot.TeleBot(config.TOKEN)
 connect = sqlite3.connect("project.db", check_same_thread=False)
 cursor = connect.cursor()
 
-# Создаём глобальные переменные
-m = 0
-w = 0
-
 # Приветствие с пользователями
 @bot.message_handler(commands=['start'])
 def welcome(message):
@@ -33,10 +29,11 @@ def welcome(message):
 
     # Клавиатура в чате
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    item1 = types.KeyboardButton("Узнать норму калорий 🍔")
-    item2 = types.KeyboardButton("Узнать каллорийность 👍")
+    item1 = types.KeyboardButton("Набрать вес 🍔")
+    item2 = types.KeyboardButton("Сбросить вес 🥒")
+    item3 = types.KeyboardButton("Узнать каллорийность 👍")
 
-    markup.add(item1, item2)
+    markup.add(item1, item2, item3)
 
     bot.send_message(message.chat.id, "Добро пожаловать, {0.first_name}!\nЯ - <b>{1.first_name}</b>, который поможет тебе подсчитать калории, а также тут ещё много разных плюшек!".format(message.from_user, bot.get_me()),
         parse_mode='html', reply_markup=markup)
@@ -45,10 +42,16 @@ def welcome(message):
 @bot.message_handler(content_types=['text'])
 def funcs(message):
     if message.chat.type == 'private':
-        if message.text == "Узнать норму калорий 🍔":
+        if message.text == "Набрать вес 🍔" or message.text == "Сбросить вес 🥒" :
 
-            bot.send_message(message.chat.id, "Укажите ваши параметры Вес, Рост и Возраст в формате: \n'Веc Рост Возраст'")
-            bot.register_next_step_handler(message, get_parms)
+            # Кнопки под сообщением
+            InlKey = types.InlineKeyboardMarkup(row_width=2)
+            man = types.InlineKeyboardButton("М", callback_data='male')
+            woman = types.InlineKeyboardButton("Ж", callback_data='female')
+
+            InlKey.add(man, woman)
+
+            bot.send_message(message.chat.id, "Какой пол? - М/Ж", reply_markup=InlKey)
 
         elif message.text == 'Узнать каллорийность 👍':
             bot.send_message(message.chat.id,'Введи продукт. Например, "Авокадо":')
@@ -56,48 +59,22 @@ def funcs(message):
         else:
             bot.send_message(message.chat.id,'Не понимаю вас.')
 
-# Нахождение параметров
-def get_parms(message):
-    global m,w
-    arr = []
-    data = message.text + " "
-    ind = -1
-    for i in range(len(data)):
-        if data[i] == " ":
-            arr.append(int(data[ind + 1:i]))
-            ind = i
+# Поиск позиций в столбце "name" в таблице "products"
 
-    # Формула для расчёта калорий для мужчин
-    m = 88.36 + 13.4 * arr[0] + 4.8 * arr[1] - 5.7 * arr[2]
-
-    # Формула для расчёта калорий для женщин
-    w = 447.6 + 9.2 * arr[0] + 3.1 * arr[1] - 4.3 * arr[2]
-
-    # Кнопки под сообщением
-    InlKey = types.InlineKeyboardMarkup(row_width=2)
-    man = types.InlineKeyboardButton("М", callback_data='male')
-    woman = types.InlineKeyboardButton("Ж", callback_data='female')
-
-    InlKey.add(man, woman)
-
-    bot.send_message(message.chat.id, "Какой пол? - М/Ж", reply_markup=InlKey)
-
-# Функция 'роутер', возвращает пользователя из меню выбора продуктов
 def router(message):
     vocabulary = {'Назад': welcome, 'Узнать каллорийность 👍' : product_name }
     vocabulary[message.text](message)
 
-# Фунция, отправляющая пользователя к поиску того или иного продукт
 def product_name(message):
     bot.send_message(message.chat.id, 'Введи продукт. Например, "Авокадо":')
     bot.register_next_step_handler(message, find)
 
-# Поиск позиций в столбце "name" в таблице "products"
 def find(message):
     text = message.text
+    #print(cursor.execute("SELECT category FROM products WHERE category=?", (text,)))
     cursor.execute("SELECT * FROM products WHERE name LIKE '%'||?||'%'", (text,))
     ans = cursor.fetchall()
-
+    #print(len(ans))
     if len(ans) == 0:
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         item = types.KeyboardButton("Узнать каллорийность 👍",)
@@ -128,15 +105,40 @@ def output(message):
     bot.send_message(message.chat.id, 'Что хотите сделать дальше?', reply_markup=markup)
     bot.register_next_step_handler(message, router)
 
+# Формула для расчёта калорий для мужчин
+def menform(message):
+    arr = []
+    data = message.text
+    bot.message_handler(data, "Введите ваш Вес, Рост и Возраст в формате: 'Веc Рост Возраст'")
+    ind = -1
+    for i in range(len(data)):
+        if data[i] == " ":
+            arr.append(data[ind + 1:i])
+            ind = i
+    menform = 88.36 + 13.4 * arr[0] + 4.8 * arr[1] - 5.7 * arr[2]
+    return menform
+# Формула для расчёта калорий для женщины
+def womform(message):
+    arr = []
+    data = message.text
+    bot.message_handler(data, "Введите ваш Вес, Рост и Возраст в формате: 'Веc Рост Возраст'")
+    ind = -1
+    for i in range(len(str(data))):
+        if data[i] == " ":
+            arr.append(data[ind + 1:i])
+            ind = i
+    womform = 447.6 + 9.2 * arr[0] + 3.1 * arr[1] - 4.3 * arr[2]
+    return womform
+
 # Ф-ция для кнопок под сообщением
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     try:
         if call.message:
             if call.data == 'male':
-                bot.send_message(call.message.chat.id, "Ваша норма калорий для мужчины составляет: " + str(m))
+                bot.send_message(call.message.chat.id, "Ваша норма калорий для мужчины составляет: " + menform)
             elif call.data == 'female':
-                bot.send_message(call.message.chat.id, "Ваша норма калорий для женщины составляет: " + str(w))
+                bot.send_message(call.message.chat.id, "Ваша норма калорий для женщины составляет: " + womform)
 
             # remove inline buttons
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Какой пол? - М/Ж",
