@@ -27,7 +27,7 @@ class TG_test(unittest.TestCase):
             time.sleep(2)
             for message in client.get_messages('@calories_counter_bot'):
                 m = message.message
-            text = "'Введи продукт. Например, "Авокадо":'"
+            text = '"Введи продукт. Например, "Авокадо":"'
             self.assertEqual(m, text)
         except:
             self.assertFalse(True)
