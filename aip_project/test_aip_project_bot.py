@@ -33,51 +33,51 @@ class TG_test(unittest.TestCase):
             self.assertFalse(True)
     def test_3(self):
         try:
-            client.send_message('@calories_counter_bot', '/start')
+            client.send_message('@calories_counter_bot', 'Узнать норму калорий 🍔')
             time.sleep(2)
             for message in client.get_messages('@calories_counter_bot'):
                 m = message.message
-            text = "Скажи, какую преследуешь цель?"
+            text = "Укажите ваши параметры Вес, Рост и Возраст в формате: \n'Веc Рост Возраст'"
             self.assertEqual(m, text)
         except:
             self.assertFalse(True)
     def test_4(self):
         try:
-            client.send_message('@calories_counter_bot', '/start')
+            client.send_message('@calories_counter_bot', '100 100 100')
             time.sleep(2)
             for message in client.get_messages('@calories_counter_bot'):
                 m = message.message
-            text = "Скажи, какую преследуешь цель?"
+            text = "Какой пол? - М/Ж"
             self.assertEqual(m, text)
         except:
             self.assertFalse(True)
     def test_5(self):
         try:
-            client.send_message('@calories_counter_bot', '/start')
+            client.send_message('@calories_counter_bot', 'Ж')
             time.sleep(2)
             for message in client.get_messages('@calories_counter_bot'):
                 m = message.message
-            text = "Скажи, какую преследуешь цель?"
+            text = "Ваша норма калорий для женщины составляет: 1247.6"
             self.assertEqual(m, text)
         except:
             self.assertFalse(True)
     def test_6(self):
         try:
-            client.send_message('@calories_counter_bot', '/start')
+            client.send_message('@calories_counter_bot', 'Ролл')
             time.sleep(2)
             for message in client.get_messages('@calories_counter_bot'):
                 m = message.message
-            text = "Скажи, какую преследуешь цель?"
+            text = "Что именно тебя интересует?"
             self.assertEqual(m, text)
         except:
             self.assertFalse(True)
     def test_7(self):
         try:
-            client.send_message('@calories_counter_bot', '/start')
+            client.send_message('@calories_counter_bot', 'Ролл «Симфония» с креветкой')
             time.sleep(2)
             for message in client.get_messages('@calories_counter_bot'):
                 m = message.message
-            text = "Скажи, какую преследуешь цель?"
+            text = "Ролл «Симфония» с креветкой\nНа 100 грамм: \nбелки 6,5 г;  жиры 10,1 г;  углеводы 17,2 г;  185,7 ккал;"
             self.assertEqual(m, text)
         except:
             self.assertFalse(True)
