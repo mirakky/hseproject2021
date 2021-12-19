@@ -5,9 +5,9 @@ import time
 
 
 #Данные пользователя, необходимо зайти на официальный сайт https://my.telegram.org/
-api_id = ''
-api_hash = ""
-client = TelegramClient('', api_id, api_hash)
+api_id = 14422138
+api_hash = "22294f2929dd121b97a5f779a29ea514"
+client = TelegramClient('@aloncess', api_id, api_hash)
 
 
 client.start()
@@ -104,3 +104,5 @@ class testBotCommmands(unittest.TestCase):
             self.assertRegex(m, text)
         except:
             self.assertFalse(True)
+
+
